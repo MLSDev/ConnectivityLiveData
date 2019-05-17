@@ -1,5 +1,5 @@
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://opensource.org/licenses/MIT)
-[![Download](https://api.bintray.com/packages/spetrosiukmlsdev/mlsdev/livedatasocialauth/images/download.svg)](https://bintray.com/spetrosiukmlsdev/mlsdev/connectivitylivedata/_latestVersion)
+[![Download](https://api.bintray.com/packages/spetrosiukmlsdev/mlsdev/connectivitylivedata/images/download.svg)](https://bintray.com/spetrosiukmlsdev/mlsdev/connectivitylivedata/_latestVersion)
 
 
 # ConnectivityLiveData
