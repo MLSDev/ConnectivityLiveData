@@ -1,6 +1,54 @@
 # ConnectivityLiveData
 The application network state observation
 
+## Setup
+To use this library your `minSdkVersion` must be >= `19`
+
+In your build.gradle :
+```gradle
+dependencies {
+    implementation "com.mlsdev.connectivitylivedata:library:$latestVersion"
+}
+```
+
+## Usage
+* Add **ConnectivityLiveData** into your **ViewModel**
+```kotlin
+  class MainViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver {
+
+      private val connectivityLiveData = ConnectivityLiveData(application)
+
+      fun getConnectivity(): LiveData<ConnectivityState> =
+          Transformations.switchMap(connectivityLiveData) { connectivityState ->
+              MutableLiveData<ConnectivityState>().apply { value = connectivityState }
+          }
+  }
+```
+* Observe the connectivity state in your **Activity** or **Fragment** 
+```kotlin
+  class MainActivity : AppCompatActivity(), LifecycleOwner {
+
+      lateinit var connectivityText: TextView
+      lateinit var viewModel: MainViewModel
+
+      override fun onCreate(savedInstanceState: Bundle?) {
+          super.onCreate(savedInstanceState)
+          setContentView(R.layout.activity_main)
+
+          connectivityText = findViewById(R.id.text_connectivity_state)
+          viewModel = MainViewModel(application)
+
+          viewModel.getConnectivity().observe(this, Observer { connectivityState ->
+              connectivityText.text = if (connectivityState == ConnectivityState.CONNECTED)
+                  "Your app is able to perform network operations"
+              else
+                  "Your app isn't able to fetch date from the network"
+          })
+
+      }
+  }
+```
+
 ## Authors
 * [Sergey Petrosyuk](mailto:petrosyuk@mlsdev.com), MLSDev
 
